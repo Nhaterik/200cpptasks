@@ -1,48 +1,73 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
 #define MAX 1000001
 #define mod 1000000007
- vector<int> fibo(10001);
-class CheckFibo
+vector<int> fibo(10001);
+class Mountain
 {
 private:
-    int n;
-   
-    unordered_set<int> F;
+    int n, l, r;
 
 public:
-    void init()
-    {
-        fibo[0] = 0;
-        fibo[1] = 1;
-        F.insert(0);
-        F.insert(1);
-        for (int i = 2; i < 19; i++)
-        {
-            fibo[i] = fibo[i - 2] + fibo[i - 1];
-            F.insert(fibo[i]);
-        }
-    }
     void solve()
     {
         cin >> n;
         int a[n];
+
         for (int i = 0; i < n; i++)
         {
             cin >> a[i];
-            if (F.find(a[i]) != F.end())
-                cout << a[i] << ' ';
         }
-        cout << endl;
+
+        cin >> l >> r;
+
+        int max = INT_MIN, index = -1;
+
+        for (int i = l; i <= r; i++)
+        {
+            if (a[i] >= max)
+            {
+                max = a[i];
+                index = i;
+            }
+        }
+
+        bool ok = true;
+
+        for (int i = l; i < index; i++)
+        {
+            if (a[i] > a[i + 1])
+            {
+                ok = false;
+                break;
+            }
+        }
+        for (int i = index; i < r; i++)
+        {
+            if (a[i] < a[i + 1])
+            {
+                ok = false;
+                break;
+            }
+        }
+
+        if (ok)
+        {
+            cout << "Yes" << endl;
+        }
+        else
+        {
+            cout << "No" << endl;
+        }
     }
 };
 int main()
 {
     long long t;
     cin >> t;
-    CheckFibo x;
-    x.init();
+    Mountain x;
     while (t--)
     {
         x.solve();
