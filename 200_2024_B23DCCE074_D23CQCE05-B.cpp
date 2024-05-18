@@ -1,69 +1,66 @@
+
+// Input:
+
+
+// 2
+// 3
+// 16 16 16
+// 2 
+// 2 3
+ 
+// Output:
+
+// 7
+// 4
 #include <bits/stdc++.h>
 using namespace std;
-#define faster()                  \
-    ;                             \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0);
-class SoTangGiam
-{
-private:
-    int n;
-
-public:
-    bool checkInc(int n)
+class SumandDouhble{
+ private:int n,cn=0;
+ vector<int> v;
+ public:
+ void solve()
+ {
+    cin>>n; v=vector<int> (n);
+    for(int i=0;i<n;i++) cin>>v[i];
+    while(true)
     {
-        int digit = n % 10;
-        n /= 10;
-        while (n % 10 < digit)
+        for(int i=0;i<n;i++)
         {
-            digit = n % 10;
-            n /= 10;
+            if(v[i]%2)
+            {
+            cn++;
+            v[i]--;
+            }            
         }
-        return n == 0;
-    }
-    bool checkDec(int n)
-    {
-        int digit = n % 10;
-        n /= 10;
-        while (n % 10 > digit)
+        cn++;
+        int ok=0;
+        for(int i=0;i<n;i++)
         {
-            digit = n % 10;
-            n /= 10;
+            v[i]/=2;
         }
-        return n == 0;
-    }
-    bool checkPrime(int n)
-
-    {
-        for (int i = 2; i <= sqrt(n); i++)
+        for(int i=0;i<n;i++)
         {
-            if (n % i == 0)
-                return false;
+            if(v[i])
+            {
+                ok=1;
+                break;
+            }
         }
-        return n > 1;
+        if(!ok) break;
     }
-    void solve()
-    {
-        cin >> n;
-        int cn = 0;
-        int p = pow(10, n - 1), q = pow(10, n) - 1;
-        for (int i = p; i <= q; i++)
-        {
-            if (checkPrime(i) && (checkInc(i) || checkDec(i)))
-                cn++;
-        }
-        cout << cn << endl;
-    }
+    cout<<cn-1<<endl;
+ }
+ 
 };
 int main()
 {
     int t;
     cin >> t;
-    faster();
     while (t--)
     {
-        SoTangGiam x;
-        x.solve();
+      SumandDouhble x;
+      x.solve();
     }
+
+    return 0;
 }
