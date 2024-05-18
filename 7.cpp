@@ -1,34 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
-class DivisibleBy2
+class DivisibleByaOrb
 {
 private:
-    int n;
+    int m,n,a,b,cn=0;
 
 public:
-    int check(int n)
-    {
-        int cn = 0;
-        for (int i = 2; i <= sqrt(n); i++)
-        {
-            if (n % i == 0)
-            {
-                if (i % 2 == 0)
-                    cn++;
-                if (i != n / i)
-                    if (n / i % 2 == 0)
-                        cn++;
-            }
-        }
-        if (n % 2 == 0)
-            cn++;
-        return cn;
-    }
+ 
     void solve()
     {
-        cin >> n;
-        cout << check(n);
-        cout << endl;
+        cin>>m>>n>>a>>b;
+	 for(int i=m;i<=n;i++)
+	 if(i%a==0 || i%b==0) cn++;
+	 cout<<cn<<endl;
     }
 };
 int main()
@@ -37,7 +21,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        DivisibleBy2 x;
+        DivisibleByaOrb x;
         x.solve();
     }
 }
