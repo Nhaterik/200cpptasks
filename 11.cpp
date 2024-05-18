@@ -1,42 +1,60 @@
 #include <bits/stdc++.h>
+#define ll long long
 using namespace std;
-class SamePrime
+// Input
+
+// Output
+
+// 3
+
+// 2  3  5  4
+
+// 4  5  6  3
+
+// 3  5  7  2
+
+// 1020
+
+// 120
+
+// -1
+class DivisibleFor3Int
 {
 private:
-    int x,cn=0;
+    ll x, y, z, n;
 
 public:
-  int isPrime(int n)
-{
-    for (int i = 2; i <= sqrt(n); i++)
-        if (n % i == 0)
-            return 0;
-    return n>1;
-}
-int gcd(int a, int b)
-{
-    if (b == 0)
-        return a;
-    return gcd(b, a % b);
-}
-    void solve()
+    ll gcd(ll a, ll b)
     {
-         cin >> x;
-        for (int i = 1; i <= x; i++)
-            if (gcd(i, x) == 1)
-                cn++;
-        if (isPrime(cn))
-            cout <<1; else cout<<0;
-            cout<<endl;
+        if (b == 0)
+            return a;
+        return gcd(b, a % b);
+    }
+    int solve()
+    {
+        cin >> x >> y >> z >> n;
+        ll sublcm = (x * y) / gcd(x, y);
+        ll lcm = (sublcm * z) / gcd(sublcm, z);
+
+        ll number = (ll)pow(10, n - 1);
+        ll remainder = number % lcm;
+        if (remainder == 0)
+            return number;
+        else
+            number += lcm - remainder;
+        if (number < (ll)pow(10, n))
+            return number;
+        else
+            return -1;
     }
 };
 int main()
 {
     long long t;
     cin >> t;
-     while (t--)
+    while (t--)
     {
-    SamePrime x;
-        x.solve();
+        DivisibleFor3Int x;
+        cout << x.solve() << endl;
     }
 }
