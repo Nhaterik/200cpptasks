@@ -1,41 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
-// Input
-
-// Output
-
-// 2
-
-// 2  2  3
-
-// 123 5  2
-
-// 2
-
-// 123
-class RepetitiveNumber
+#define MAX 1000001
+vector<int> prime(MAX, 1);
+class CountPrime
 {
 private:
-   	long long a,x,y;
+    int a, b, cn = 0;
 
 public:
-
-    int solve()
+    void init()
     {
-        cin>>a>>x>>y;
-	long long GCD=__gcd(x,y);
-	for(int i=0;i<GCD;i++)
-	cout<<a;
-	cout<<endl;
+        prime[1] = prime[0] = 0;
+        int sq = sqrt(MAX);
+        for (int i = 2; i < sq; i++)
+        {
+            for (int j = i * i; j < MAX; j += i)
+                if (prime[j])
+                    prime[j] = 0;
+        }
+    }
+    void solve()
+    {
+        cn=0;
+        cin >> a >> b;
+        for (int i = a; i <= b; i++)
+            if (prime[i])
+                cn++;
+        cout << cn << endl;
     }
 };
 int main()
 {
     long long t;
     cin >> t;
+    CountPrime x;
+    x.init();
     while (t--)
     {
-        RepetitiveNumber x;
-         x.solve();
+        x.solve();
     }
 }
+// Input:
+
+// Output:
+
+// 2
+// 1 10
+// 5 10
+
+// 4
+// 2
